@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 import os
-from datetime import datetime
 
 app = Flask(__name__)
 
@@ -10,18 +9,17 @@ def home():
 
 @app.route('/ask', methods=['POST'])
 def ask():
-    user_message = request.json.get("message", "").lower()
-    hora_actual = datetime.now().strftime("%H:%M")
+    data = request.get_json()
+    mensaje = data.get("message", "").lower()
     
-    # Inteligencia básica inicial
-    if "hola" in user_message:
-        bot_response = f"Hola Eduardo. Sistemas en línea. Hora en el servidor: {hora_actual}."
-    elif "estado" in user_message:
-        bot_response = "Todos los núcleos están operativos en Panamá. Conexión estable."
+    if "hola" in mensaje:
+        respuesta = "Hola Eduardo. Sistemas en línea en Panamá."
+    elif "estado" in mensaje:
+        respuesta = "Núcleos estables. Energía al 100%."
     else:
-        bot_response = f"He recibido tu comando: '{user_message}'. Estoy listo para aprender más."
+        respuesta = f"Comando '{mensaje}' recibido y procesado."
         
-    return jsonify({"response": bot_response})
+    return jsonify({"response": respuesta})
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
