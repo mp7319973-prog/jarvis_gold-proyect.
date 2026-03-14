@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    # Esta línea le dice a Python: "Busca el diseño en la carpeta templates"
+    # Esta línea es la que busca tu archivo dentro de la carpeta templates
     return render_template('index.html')
 
 if __name__ == '__main__':
