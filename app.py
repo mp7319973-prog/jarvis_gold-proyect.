@@ -5,9 +5,10 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    # Esta línea es la que busca tu archivo dentro de la carpeta templates
+    # Esta es la instrucción mágica que conecta con tu carpeta templates
     return render_template('index.html')
 
 if __name__ == '__main__':
+    # Render necesita esto para saber en qué puerto trabajar
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
